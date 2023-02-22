@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "vector"
+using namespace std;
 
 
 struct studentas {

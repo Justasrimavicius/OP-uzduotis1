@@ -1,4 +1,3 @@
-using namespace std;
 
 #include <cctype>
 #include <iostream>
@@ -7,7 +6,8 @@ using namespace std;
 #include <ctime>
 #include <time.h>
 
-bool isNumber(const string &s) {
+
+bool isNumber(const std::string &s) {
     for (int i = 0; i < s.length(); i++) {
         if (!isdigit(s[i])) {
             return false;

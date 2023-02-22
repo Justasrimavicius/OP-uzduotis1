@@ -1,4 +1,5 @@
 #include "functions.h"
+using namespace std;
 
 struct studentas {
     string vardas;
@@ -62,11 +63,10 @@ int main() {
         
         
         int bendrasNDbalas = 0;
-
         if(atsitiktiniaiRez == "t"){
             visiStudentai[i].ndRez = new string[stoi(visiStudentai[i].ndKiekis)];
             for (int j = 0; j < stoi(visiStudentai[i].ndKiekis); j++) {
-                visiStudentai[i].ndRez[j] = rand() % 10 + 1;
+                visiStudentai[i].ndRez[j] = to_string(rand() % 10 + 1);
                 bendrasNDbalas = stoi(visiStudentai[i].ndRez[j]) + bendrasNDbalas;
             }
         } else{
