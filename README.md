@@ -27,3 +27,8 @@ Pavardė     Vardas      Galutinis(vid./med.)
 
 Sukurti 2 atskirus failus(darbartiniu atveju - uzduotisMASYVAI.cpp ir uzduotisVEKTORIAI.cpp) kurie studento namų darbų rezultatų įvedimui naudotų dinaminius masyvus ir vektorius.
 
+# V0.2
+Papildykite programos versiją (v0.1) taip, kad būtų galima duomenis ne tik įvesti bet ir nuskaityti iš failo.
+
+Reikalavimai output’ui: studentai turi būti surūšiuoti pagal vardus (ar pavardes) ir visi stulpeliai būtų gražiai "išlygiuoti".
+

@@ -118,9 +118,6 @@ int main() {
         cout << endl;
     }
 
-    for (int i = 0; i < stoi(studSkaicius); i++) {
-        delete[] visiStudentai[i].ndRez;
-    }
     delete[] visiStudentai;
 
     return 0;

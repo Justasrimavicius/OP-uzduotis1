@@ -67,6 +67,10 @@
         "iterator": "cpp",
         "utility": "cpp",
         "numeric": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "__functional_03": "cpp",
+        "fstream": "cpp",
+        "deque": "cpp",
+        "stack": "cpp"
     }
 }
