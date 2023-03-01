@@ -32,3 +32,5 @@ Papildykite programos versiją (v0.1) taip, kad būtų galima duomenis ne tik 
 
 Reikalavimai output’ui: studentai turi būti surūšiuoti pagal vardus (ar pavardes) ir visi stulpeliai būtų gražiai "išlygiuoti".
 
+# V0.3
+Papildyta V0.2 versija - functions.h faile perkelta strucktura bei rikiavimo algoritmas, prideti try/catch blokai.

@@ -1,22 +1,14 @@
 #include "functions.h"
+#include <string>
 #include "vector"
+
 using namespace std;
-
-
-struct studentas {
-    string vardas;
-    string pavarde;
-    string egzaminoRez;
-    vector<string> ndRez;
-    string ndKiekis;
-    double galutinisBalas;
-};
 
 void duomenysIvedamiKonsoleje(vector<studentas>& visiStudentai, string studSkaicius);
 void duomenysIsFailo(vector<studentas>& visiStudentai, string fileName);
-int compareStudents(const studentas& s1, const studentas& s2);
-void quicksort(std::vector<studentas>& arr, int low, int high);
-int partition(std::vector<studentas>& arr, int low, int high);
+
+// void quicksort(std::vector<studentas>& arr, int low, int high);
+// int partition(std::vector<studentas>& arr, int low, int high);
 
 
 int main() {
@@ -45,23 +37,23 @@ int main() {
     // rusiavimas pagal varde/pavarde
     quicksort(visiStudentai, 0, visiStudentai.size() - 1);
 
-
     cout << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis(vid.)" << setw(20) << "Galutinis(med.)" << endl;
     cout << "-------------------------------------------------------------------------------" << endl;
 
-
-
-
-    for(int i = 0; i < stoi(studSkaicius); i++){
-        cout << setw(15) << visiStudentai[i].vardas;
-        cout << setw(15) << visiStudentai[i].pavarde;
-        cout << setw(20) << fixed << setprecision(2) << visiStudentai[i].galutinisBalas; // Galutinis(vid.)
-        if(stoi(visiStudentai[i].ndKiekis) % 2 == 0){ // Galutinis(med.)
-            cout << setw(20) << fixed << setprecision(2) << (double)(stoi(visiStudentai[i].ndRez.at(stoi(visiStudentai[i].ndKiekis)/2)) + stoi(visiStudentai[i].ndRez.at(stoi(visiStudentai[i].ndKiekis)/2 - 1)))/2 * 0.4 + (stoi(visiStudentai[i].egzaminoRez) * 0.6);
-        } else {
-            cout << setw(20) << fixed << setprecision(2) <<  (stoi(visiStudentai[i].ndRez.at(stoi(visiStudentai[i].ndKiekis)/2)) * 0.4) + (stoi(visiStudentai[i].egzaminoRez) * 0.6);
+    try{
+        for(int i = 0; i < stoi(studSkaicius); i++){
+            cout << setw(15) << visiStudentai[i].vardas;
+            cout << setw(15) << visiStudentai[i].pavarde;
+            cout << setw(20) << fixed << setprecision(2) << visiStudentai[i].galutinisBalas; // Galutinis(vid.)
+            if(stoi(visiStudentai[i].ndKiekis) % 2 == 0){ // Galutinis(med.)
+                cout << setw(20) << fixed << setprecision(2) << (double)(stoi(visiStudentai[i].ndRez.at(stoi(visiStudentai[i].ndKiekis)/2)) + stoi(visiStudentai[i].ndRez.at(stoi(visiStudentai[i].ndKiekis)/2 - 1)))/2 * 0.4 + (stoi(visiStudentai[i].egzaminoRez) * 0.6);
+            } else {
+                cout << setw(20) << fixed << setprecision(2) <<  (stoi(visiStudentai[i].ndRez.at(stoi(visiStudentai[i].ndKiekis)/2)) * 0.4) + (stoi(visiStudentai[i].egzaminoRez) * 0.6);
+            }
+            cout << endl;
         }
-        cout << endl;
+    } catch (...) {
+        cout << "Klaida isvedant duomenis." << endl;
     }
 
     return 0;
@@ -140,67 +132,44 @@ void duomenysIvedamiKonsoleje(vector<studentas>& visiStudentai, string studSkaic
 }
 
 void duomenysIsFailo(vector<studentas>& visiStudentai, string fileName){
-    ifstream failas(fileName + ".txt");
-    string eilute;
+    try{
+        ifstream failas(fileName + ".txt");
+        string eilute;
 
-    getline(failas, eilute);
-    istringstream iss(eilute);
-    vector<string> headers;
-    string header;
-    while (iss >> header) {
-        headers.push_back(header);
-    }
-
-    while (getline(failas, eilute)){
+        getline(failas, eilute);
         istringstream iss(eilute);
-        studentas studentas;
-        iss >> studentas.vardas >> studentas.pavarde;
-
-        string nd;
-        int bendrasNDbalas = 0;
-        int ndQty = 0;
-        for (int i = 0; i < headers.size() - 3; ++i) {
-            iss >> nd;
-            studentas.ndRez.push_back(nd);
-            bendrasNDbalas += stoi(nd);
-            nd = "";
-            ndQty++;
+        vector<string> headers;
+        string header;
+        while (iss >> header) {
+            headers.push_back(header);
         }
 
-        iss >> studentas.egzaminoRez;
-        studentas.ndKiekis = to_string(ndQty);
-        studentas.galutinisBalas = ((double)bendrasNDbalas/stoi(studentas.ndKiekis)) * 0.4 + (stoi(studentas.egzaminoRez) * 0.6);
+        while (getline(failas, eilute)){
+            istringstream iss(eilute);
+            studentas studentas;
+            iss >> studentas.vardas >> studentas.pavarde;
 
-        visiStudentai.push_back(studentas);
-    }
+            string nd;
+            int bendrasNDbalas = 0;
+            int ndQty = 0;
+            for (int i = 0; i < headers.size() - 3; ++i) {
+                iss >> nd;
+                studentas.ndRez.push_back(nd);
+                bendrasNDbalas += stoi(nd);
+                nd = "";
+                ndQty++;
+            }
 
-    failas.close();
+            iss >> studentas.egzaminoRez;
+            studentas.ndKiekis = to_string(ndQty);
+            studentas.galutinisBalas = ((double)bendrasNDbalas/stoi(studentas.ndKiekis)) * 0.4 + (stoi(studentas.egzaminoRez) * 0.6);
 
-}
-
-int compareStudents(const studentas& s1, const studentas& s2) {
-    int cmp = s1.vardas.compare(s2.vardas);
-    if (cmp != 0) return cmp;
-    return s1.pavarde.compare(s2.pavarde);
-}
-
-int partition(vector<studentas>& arr, int low, int high) {
-    studentas pivot = arr[high];
-    int i = low - 1;
-    for (int j = low; j <= high - 1; j++) {
-        if (compareStudents(arr[j], pivot) <= 0) {
-            i++;
-            swap(arr[i], arr[j]);
+            visiStudentai.push_back(studentas);
         }
+
+        failas.close();
+    } catch (...) {
+        cout << "Klaida ivedant duomenis is failo." << endl;
     }
-    swap(arr[i + 1], arr[high]);
-    return (i + 1);
 }
 
-void quicksort(vector<studentas>& arr, int low, int high) {
-    if (low < high) {
-        int pi = partition(arr, low, high);
-        quicksort(arr, low, pi - 1);
-        quicksort(arr, pi + 1, high);
-    }
-}
