@@ -1,0 +1,1 @@
+g++ functions.cpp uzduotisVEKTORIAI.cpp -o run.exe && ./run.exe

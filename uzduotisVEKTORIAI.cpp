@@ -1,15 +1,11 @@
 #include "functions.h"
-#include <string>
-#include "vector"
+// #include <string>
+// #include "vector"
 
 using namespace std;
 
 void duomenysIvedamiKonsoleje(vector<studentas>& visiStudentai, string studSkaicius);
 void duomenysIsFailo(vector<studentas>& visiStudentai, string fileName);
-
-// void quicksort(std::vector<studentas>& arr, int low, int high);
-// int partition(std::vector<studentas>& arr, int low, int high);
-
 
 int main() {
     string studSkaicius;
@@ -20,6 +16,7 @@ int main() {
     cin >> dataFaileArIvesti; // arba "f", arba failo pavadinimas
     if(dataFaileArIvesti != "f"){
         duomenysIsFailo(visiStudentai, dataFaileArIvesti);
+        if(visiStudentai.size() == 0)return 0;
         studSkaicius = to_string(visiStudentai.size());
 
     } else {
@@ -134,6 +131,7 @@ void duomenysIvedamiKonsoleje(vector<studentas>& visiStudentai, string studSkaic
 void duomenysIsFailo(vector<studentas>& visiStudentai, string fileName){
     try{
         ifstream failas(fileName + ".txt");
+        if(failas.fail())throw (false);
         string eilute;
 
         getline(failas, eilute);
@@ -143,6 +141,7 @@ void duomenysIsFailo(vector<studentas>& visiStudentai, string fileName){
         while (iss >> header) {
             headers.push_back(header);
         }
+        if(headers.size() < 3)throw (false);
 
         while (getline(failas, eilute)){
             istringstream iss(eilute);
